@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,13 +23,34 @@ public class LeftSideBar {
     @Test
     void checkItemMenuName(){
         $("[data-testid='workspaceRoute']").shouldHave(text("Дашборды"));
+        $("[data-testid='workspaceRoute']").shouldBe(visible);
+
         $("[data-testid='applicationRoute']").shouldHave(text("Приложения"));
+        $("[data-testid='applicationRoute']").shouldBe(visible);
+
         $("[data-testid='scansRoute']").shouldHave(text("Сканирования"));
+        $("[data-testid='scansRoute']").shouldBe(visible);
+
+
         $("[data-testid='issuesRoute']").shouldHave(text("Уязвимости"));
+        $("[data-testid='issuesRoute']").shouldBe(visible);
+
+
         $("[data-testid='defectsRoute']").shouldHave(text("Дефекты"));
+        $("[data-testid='defectsRoute']").shouldBe(visible);
+
+
         $("[data-testid='releaseObjectsRoute']").shouldHave(text("Релизные объекты"));
+        $("[data-testid='releaseObjectsRoute']").shouldBe(visible);
+
+
         $("[data-testid='ssdlMenuBtn']").shouldHave(text("SSDL"));
+        $("[data-testid='ssdlMenuBtn']").shouldBe(visible);
+
+
         $("[data-testid='metricsMenuBtn']").shouldHave(text("Метрики"));
+        $("[data-testid='metricsMenuBtn']").shouldBe(visible);
+
     }
 
     @Test
