@@ -1,7 +1,12 @@
 package pages;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import com.codeborne.selenide.Configuration;
+
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 
 public class LogInPage {
 
@@ -11,6 +16,8 @@ public class LogInPage {
 
     public void loginInput(String login){
         $("[data-testid='loginInput'] input")
+                .shouldBe(visible, Duration.ofSeconds(5))
+                .scrollIntoCenter()
                 .setValue(login);
     }
     public void passwordInput(String password){

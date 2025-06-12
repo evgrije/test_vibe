@@ -1,12 +1,17 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.ApplicationPage;
 import pages.ListOfApplicationsPage;
 import pages.LogInPage;
 
-public class ApplicationTests {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class ApplicationTest {
+
     @BeforeEach
     void succesfulLogIn(){
         LogInPage logInPage = new LogInPage();
@@ -23,4 +28,6 @@ public class ApplicationTests {
         ApplicationPage applicationPage = new ApplicationPage();
         applicationPage.checkOpenAppPage();
     }
+
+
 }

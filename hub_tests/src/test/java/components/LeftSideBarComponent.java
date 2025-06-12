@@ -1,7 +1,10 @@
 package components;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -10,20 +13,40 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LeftSideBarComponent {
 
-    public void leftSideBarDashboard(){
-        $("[data-testid='workspaceRoute']").shouldHave(text("Дашборды"));
-        $("[data-testid='workspaceRoute']").shouldBe(visible);
+    private SelenideElement component;
+
+    public LeftSideBarComponent(){
+        component = $("div[class=*'ng-trigger-leftMenu']");
+    }
+
+    //Elements methods
+    private SelenideElement getScanRouteElement() {
+        return component.$("[data-testid='scansRoute']");
+    }
+
+    private SelenideElement getWorkspaceElement() {
+        return component.$("[data-testid='workspaceRoute']");
+    }
+
+    //check visible methods
+    public void checkWorkspaceDashboardElement(){
+        getWorkspaceElement()
+                .shouldBe(visible, Duration.ofSeconds(5))
+                .shouldHave(text("Дашборды"));
     }
 
     public void leftSideBarApplication(){
-        $("[data-testid='applicationRoute']").shouldHave(text("Приложения"));
-        $("[data-testid='applicationRoute']").shouldBe(visible);
+        SelenideElement applicationElement = $("[data-testid='applicationRoute']");
+        applicationElement.shouldHave(text("Приложения"));
+        applicationElement.shouldBe(visible);
     }
 
     public void leftSideBarScans(){
+        getScanRouteElement().shouldBe(visible);
         $("[data-testid='scansRoute']").shouldHave(text("Сканирования"));
-        $("[data-testid='scansRoute']").shouldBe(visible);
     }
+
+
 
     public void leftSideBarIssues(){
         $("[data-testid='issuesRoute']").shouldHave(text("Уязвимости"));
@@ -51,7 +74,7 @@ public class LeftSideBarComponent {
     }
 
     public void checkVisibleSideBar(){
-        leftSideBarDashboard();
+        checkWorkspaceDashboardElement();
         leftSideBarApplication();
         leftSideBarScans();
         leftSideBarDefects();
@@ -62,7 +85,7 @@ public class LeftSideBarComponent {
     }
 
     public void checkUrlItemDashboard(){
-        $("[data-testid='workspaceRoute']")
+        getWorkspaceElement()
                 .click();
         String expUrlDash = "https://hub.dev.swordfishsecurity.com/#/workspace";
         assertEquals(expUrlDash, WebDriverRunner.url());
@@ -77,7 +100,7 @@ public class LeftSideBarComponent {
     }
 
     public void checkUrlItemScan(){
-        $("[data-testid='scansRoute']").click();
+        getScanRouteElement().click();
         String expUrlScan = "https://hub.dev.swordfishsecurity.com/#/scans";
         assertEquals(expUrlScan, WebDriverRunner.url());
         Selenide.back();
@@ -100,7 +123,7 @@ public class LeftSideBarComponent {
     public void checkUrlItemReleaseObject(){
         $("[data-testid='releaseObjectsRoute']").click();
         String expUrlReleaseObject = "https://hub.dev.swordfishsecurity.com/#/releaseobjects";
-        assertEquals(expUrlReleaseObject, WebDriverRunner.url());
+        assertEquals(expUrlReleaseObject, WebDriverRunner.url(), "Current url not equals to expected /releaseobjects");
         Selenide.back();
     }
 
