@@ -16,7 +16,7 @@ public class LeftSideBarTest {
     void succesfulLogIn(){
         LogInPage logInPage = new LogInPage();
         logInPage.openPageLogIn();
-        logInPage.logIn("abracadabra", "abracadabra");
+        logInPage.logIn();
     }
 
     @Test

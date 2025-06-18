@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class LogInPage {
 
     public void openPageLogIn(){
-        open("https://hub.dev.swordfishsecurity.com");
+        open("https://hub.k8s.swordfishsecurity.com/");
     }
 
     public void loginInput(String login){
@@ -29,9 +29,9 @@ public class LogInPage {
                 .click();
     }
 
-    public void logIn(String login, String password){
-        loginInput(login);
-        passwordInput(password);
+    public void logIn(){
+        loginInput("abracadabra");
+        passwordInput("abracadabra");
         buttonLogIn();
     }
 }
